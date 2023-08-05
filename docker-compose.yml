@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  djflossy:
+    build: .
+    restart: always
+    container_name: djflossy
+    volumes:
+      - .env/home/node/DjFlossy/.env
