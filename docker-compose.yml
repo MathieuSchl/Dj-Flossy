@@ -7,4 +7,4 @@ services:
     restart: always
     container_name: djflossy
     volumes:
-      - .env/home/node/DjFlossy/.env
+      - .env:/home/node/DjFlossy/.env
