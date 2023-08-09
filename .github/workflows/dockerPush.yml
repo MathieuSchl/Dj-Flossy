@@ -12,7 +12,7 @@ jobs:
           json_content=$(cat package.json)
           version=$(echo "$json_content" | jq -r '.version')
           echo "Target version : $version"
-          if [[ "$(docker manifest inspect ${{ secrets.DOCKERHUB_USERNAME }}/dj-flossy:{{ version }} 2> /dev/null)" != "" ]]; then
+          if [[ "$(docker manifest inspect ${{ secrets.DOCKERHUB_USERNAME }}/dj-flossy:$version" != "" ]]; then
             echo -e "\e[31mVersion $version already exist"
             exit 0
           fi
