@@ -15,6 +15,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Check if version already exist
+        id: define_build
         run: |
           json_content=$(cat package.json)
           version=$(echo "$json_content" | jq -r '.version')
@@ -54,7 +55,7 @@ jobs:
     steps:
       - name: Echo all
         env:
-          test: ${{ needs }}
+          test: ${{ steps.define_build.outputs.version }}
         run: echo $test
 
       - name: Echo version
