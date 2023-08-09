@@ -19,10 +19,11 @@ jobs:
           json_content=$(cat package.json)
           version=$(echo "$json_content" | jq -r '.version')
           echo "Target version : $version"
-          if [[ $(docker manifest inspect ${{ secrets.DOCKERHUB_USERNAME }}/dj-flossy:$version) != "" ]]; then
+          if [[ $(docker manifest inspect ${{ secrets.DOCKERHUB_USERNAME }}/dj-flossy:$version 2> /dev/null) != "" ]]; then
             echo -e "\e[31mVersion $version already exist"
             echo "Version $version already exist" >> $GITHUB_STEP_SUMMARY
           else
+            echo -e "\e[32mBuild image version $version"
             echo "run_build=yes" >> $GITHUB_OUTPUT
             echo "version=$version" >> $GITHUB_OUTPUT
           fi
