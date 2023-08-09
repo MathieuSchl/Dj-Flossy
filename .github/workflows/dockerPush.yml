@@ -24,9 +24,8 @@ jobs:
             echo "Version $version already exist" >> $GITHUB_STEP_SUMMARY
           else
             echo -e "\e[32mBuild image version $version"
-            echo "run_build=yes" >> $GITHUB_OUTPUT
-            echo "version=$version" >> $GITHUB_OUTPUT
-            cat $GITHUB_OUTPUT
+            echo "::set-output name=run_build::ys"
+            echo "::set-output name=version::$version"
           fi
 
 
