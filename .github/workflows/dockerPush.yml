@@ -21,7 +21,6 @@ jobs:
           echo "Target version : $version"
           if [[ $(docker manifest inspect codyisthesenate/dj-flossy:$version) != "" ]]; then
             echo -e "\e[31mVersion $version already exist"
-            echo "::set-output name=run_build::yes"
             echo "run_build=yes" >> $GITHUB_OUTPUT
             exit 0
           fi
