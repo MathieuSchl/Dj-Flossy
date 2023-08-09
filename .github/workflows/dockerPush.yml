@@ -26,7 +26,7 @@ jobs:
             echo -e "\e[32mBuild image version $version"
             echo "run_build=yes" >> $GITHUB_OUTPUT
             echo "version=$version" >> $GITHUB_OUTPUT
-            echo $GITHUB_OUTPUT
+            cat $GITHUB_OUTPUT
           fi
 
 
