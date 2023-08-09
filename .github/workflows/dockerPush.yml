@@ -26,19 +26,3 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-
-      - name: Build and push (tagged version)
-        uses: aaaaaaaaaaaaaaaaaadocker/build-push-action@v4
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/dj-flossy:$version
-
-      - name: Build and push (latest version)
-        uses: aaaaaaaaaaaaaaaaaaaaadocker/build-push-action@v4
-        with:
-          context: .
-          file: ./Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/dj-flossy:latest
