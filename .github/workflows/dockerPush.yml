@@ -50,3 +50,19 @@ jobs:
         env:
           version: ${{ needs.Check.outputs.version }}
         run: echo "Build image ${{ secrets.DOCKERHUB_USERNAME }}/dj-flossy:$version"
+
+      - name: Build and push (tagged version)
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/dj-flossy:$version
+
+      - name: Build and push (latest version)
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/dj-flossy:latest
