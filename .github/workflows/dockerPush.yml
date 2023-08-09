@@ -57,7 +57,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/dj-flossy:$version
+          tags: "${{ secrets.DOCKERHUB_USERNAME }}/dj-flossy:$version"
 
       - name: Build and push (latest version)
         uses: docker/build-push-action@v4
@@ -65,4 +65,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/dj-flossy:latest
+          tags: "${{ secrets.DOCKERHUB_USERNAME }}/dj-flossy:latest"
