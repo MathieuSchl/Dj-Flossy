@@ -10,6 +10,10 @@ const choices = [
     name: "NCS",
     value: "PLRBp0Fe2GpgnK6tqqlVDbmTqQTF-6rrRj",
   },
+  {
+    name: "Nightcore",
+    value: "PLsECK12cRZ2EgFMJmxxUUVJwy8EY3odWB",
+  },
 ];
 
 function getPlaylistName(url) {
