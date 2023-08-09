@@ -1,0 +1,45 @@
+name: Linter
+run-name: "DockerPush : ${{ github.actor }} push '${{ github.event.head_commit.message }}' 🚀"
+on: [push]
+jobs:
+  Push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Get tag version
+        run: |
+          json_content=$(cat package.json) \
+          version=$(echo "$json_content" | jq -r '.version')
+          echo "Target version : $version"
+      - name: Check if version already exist
+        run: |
+          if [[ "$(docker manifest inspect ${{ secrets.DOCKERHUB_USERNAME }}/dj-flossy:$version 2> /dev/null)" != "" ]]; then
+            echo -e "\e[31mVersion $version already exist"
+            exit 0
+          fi
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build and push (tagged version)
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/dj-flossy:$version
+
+      - name: Build and push (latest version)
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/dj-flossy:latest
