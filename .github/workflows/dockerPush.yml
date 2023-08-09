@@ -52,18 +52,14 @@ jobs:
         run: echo "Build image ${{ secrets.DOCKERHUB_USERNAME }}/dj-flossy:$version"
 
       - name: Build and push (tagged version)
-        env:
-          version: ${{ needs.Check.outputs.version }}
         uses: docker/build-push-action@v4
         with:
           context: .
           file: ./Dockerfile
           push: true
-          tags: "${{ secrets.DOCKERHUB_USERNAME }}/dj-flossy:$version"
+          tags: "${{ secrets.DOCKERHUB_USERNAME }}/dj-flossy:${{ needs.Check.outputs.version }}"
 
       - name: Build and push (latest version)
-        env:
-          version: ${{ needs.Check.outputs.version }}
         uses: docker/build-push-action@v4
         with:
           context: .
