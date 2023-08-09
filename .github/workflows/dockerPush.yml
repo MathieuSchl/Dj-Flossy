@@ -26,9 +26,8 @@ jobs:
             echo -e "\e[32mBuild image version $version"
             echo "run_build=yes" >> $GITHUB_OUTPUT
             echo "version=$version" >> $GITHUB_OUTPUT
+            echo $GITHUB_OUTPUT
           fi
-    outputs:
-      run_build: ${{ steps.set.outputs.run_build }}
 
 
 
@@ -46,5 +45,5 @@ jobs:
 
       - name: Echo version
         env:
-          version: ${{needs.job1.outputs.version}}
+          version: ${{ needs.Check.outputs.version }}
         run: echo "Build image ${{ secrets.DOCKERHUB_USERNAME }}/dj-flossy:$version"
