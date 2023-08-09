@@ -52,6 +52,11 @@ jobs:
     needs:
       - Check
     steps:
+      - name: Echo all
+        env:
+          test: ${{ needs }}
+        run: echo $test
+
       - name: Echo version
         env:
           version: ${{ needs.Check.outputs.version }}
