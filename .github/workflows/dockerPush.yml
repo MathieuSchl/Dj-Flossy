@@ -7,13 +7,11 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
-      - name: Get tag version
-        run: |
-          json_content=$(cat package.json) \
-          version=$(echo "$json_content" | jq -r '.version')
-          echo "Target version : $version"
       - name: Check if version already exist
         run: |
+          json_content=$(cat package.json)
+          version=$(echo "$json_content" | jq -r '.version')
+          echo "Target version : $version"
           if [[ "$(docker manifest inspect ${{ secrets.DOCKERHUB_USERNAME }}/dj-flossy:$version 2> /dev/null)" != "" ]]; then
             echo -e "\e[31mVersion $version already exist"
             exit 0
