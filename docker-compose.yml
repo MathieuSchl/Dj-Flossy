@@ -3,7 +3,7 @@ version: "3"
 services:
   djflossy:
     #build: .
-    image: codyisthesenate/dj-flossy:1.0.1
+    image: codyisthesenate/dj-flossy:1.0.2
     restart: always
     container_name: djflossy
     volumes:
